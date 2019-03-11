@@ -4,7 +4,7 @@ import java.awt.Color;
 public class Background {
 /**
  * initializes the number of rows and columns
- * of the background asdasdsa
+ * of the background asdasdsaasdsadasdas
  */
 
 final int ROW_NUM ;
