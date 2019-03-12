@@ -1,7 +1,8 @@
 package snakeGame;
 import java.awt.Color;
-
-public class Background {
+import javax.swing.*;
+import java.awt.Dimension;
+public class Background extends JFrame {
 /**
  * initializes the number of rows and columns
  * of the background 
@@ -25,6 +26,12 @@ public Background(int rows, int cols)
 			blocks[row][column] = new Block(row, column);
 		}
 	}
+	createBoard();
 	
+}
+private void createBoard()
+{
+	setBackground(Color.PINK);
+	setPreferredSize(new Dimension(ROW_NUM, COL_NUM));
 }
 }
