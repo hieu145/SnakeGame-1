@@ -5,10 +5,10 @@ import java.awt.Image;
 import java.awt.Toolkit;
 
 import javax.swing.ImageIcon;
-/asdf
+
 public class Snake {
-    private final int B_WIDTH = 300;
-    private final int B_HEIGHT = 300;
+    private final int B_WIDTH = 300; //import from background later
+    private final int B_HEIGHT = 300; //import from background later
     private final int DOT_SIZE = 10;
     private final int ALL_DOTS = 900;
     private final int x[] = new int[ALL_DOTS];
@@ -29,6 +29,35 @@ public class Snake {
             } else {
                 g.drawImage(ball, x[z], y[z], null);
             }
+        }
+    }
+    
+    private boolean leftDirection = false;
+    private boolean rightDirection = true;
+    private boolean upDirection = false;
+    private boolean downDirection = false;
+    
+    private void move() {
+
+        for (int z = dots; z > 0; z--) {
+            x[z] = x[(z - 1)];
+            y[z] = y[(z - 1)];
+        }
+
+        if (leftDirection) {
+            x[0] -= DOT_SIZE;
+        }
+
+        if (rightDirection) {
+            x[0] += DOT_SIZE;
+        }
+
+        if (upDirection) {
+            y[0] -= DOT_SIZE;
+        }
+
+        if (downDirection) {
+            y[0] += DOT_SIZE;
         }
     }
 }
