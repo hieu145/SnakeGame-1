@@ -31,4 +31,33 @@ public class Snake {
             }
         }
     }
+    
+    private boolean leftDirection = false;
+    private boolean rightDirection = true;
+    private boolean upDirection = false;
+    private boolean downDirection = false;
+    
+    private void move() {
+
+        for (int z = dots; z > 0; z--) {
+            x[z] = x[(z - 1)];
+            y[z] = y[(z - 1)];
+        }
+
+        if (leftDirection) {
+            x[0] -= DOT_SIZE;
+        }
+
+        if (rightDirection) {
+            x[0] += DOT_SIZE;
+        }
+
+        if (upDirection) {
+            y[0] -= DOT_SIZE;
+        }
+
+        if (downDirection) {
+            y[0] += DOT_SIZE;
+        }
+    }
 }
