@@ -5,7 +5,8 @@ import java.awt.Dimension;
 public class Background extends JFrame {
 /**
  * initializes the number of rows and columns
- * of the background test
+ * of the background 
+ * testingsadasdsa
  */
 
 final int ROW_NUM ;
