@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="SnakeGame-1/src"/>
+	<classpathentry kind="src" path="resourse"/>
+	<classpathentry kind="output" path="SnakeGame-1/bin"/>
+</classpath>
