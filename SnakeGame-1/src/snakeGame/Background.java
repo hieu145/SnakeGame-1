@@ -9,8 +9,8 @@ public class Background extends JFrame {
  * testingsadasdsa
  */
 
-final int ROW_NUM ;
-final int COL_NUM;
+public final int ROW_NUM ;
+public final int COL_NUM;
 Block[][] blocks; 
 /**
  * creates a board
