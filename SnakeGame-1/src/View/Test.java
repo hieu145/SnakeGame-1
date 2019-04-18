@@ -1,12 +1,12 @@
-package snakeGame;
+package View;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
 public class Test {
-	private static final int ICON_WIDTH = 400;
+	private static final int ICON_WIDTH = 1900;
 	private static final int SNAKE_WIDTH = 100;
-	private static final int ICON_HEIGHT = 100;
+	private static final int ICON_HEIGHT = 1900;
 public static void main(String[] args)
 {
 	JFrame frame = new JFrame();
@@ -19,7 +19,7 @@ public static void main(String[] args)
 	frame.pack();
 	frame.setVisible(true);
 	
-	final int delay = 1;
+	final int delay = -10000000;
 	Timer t = new Timer(delay, event -> 
 	{
 		shape.move();

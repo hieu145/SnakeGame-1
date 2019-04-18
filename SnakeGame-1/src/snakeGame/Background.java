@@ -11,7 +11,7 @@ public class Background extends JFrame {
 
 public final int ROW_NUM ;
 public final int COL_NUM;
-Block[][] blocks; 
+private Block[][] blocks; 
 /**
  * creates a board
  */
@@ -28,7 +28,12 @@ public Background(int rows, int cols)
 		}
 	}
 	createBoard();
-	
+}
+public Block[][]getBlocks(){
+	return blocks;
+}
+public void setBlocks(Block[][] blocks) {
+	this.blocks = blocks;
 }
 private void createBoard()
 {

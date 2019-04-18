@@ -1,4 +1,4 @@
-package snakeGame;
+package View;
 import java.awt.*;
 import java.util.*;
 import javax.swing.*;

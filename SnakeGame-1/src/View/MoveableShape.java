@@ -1,4 +1,4 @@
-package snakeGame;
+package View;
 import java.awt.*;
 public interface MoveableShape {
 
