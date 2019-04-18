@@ -11,6 +11,7 @@ public MoveableSnake(int x, int y, int width)
 	this.width = width;
 }
 public void move() {
+
 	x++;
 }
 public void draw(Graphics2D g2) {
