@@ -24,6 +24,7 @@ public void draw(Graphics2D g2) {
 	g2.drawString("Welcome", 850, 450);
 }
 public void move() {
+	y++;
 	x++;
 }
 	
