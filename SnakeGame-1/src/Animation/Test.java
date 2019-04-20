@@ -1,4 +1,4 @@
-package View;
+package Animation;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -19,7 +19,7 @@ public static void main(String[] args)
 	frame.pack();
 	frame.setVisible(true);
 	
-	final int delay = -10000000;
+	final int delay = 10;
 	Timer t = new Timer(delay, event -> 
 	{
 		shape.move();

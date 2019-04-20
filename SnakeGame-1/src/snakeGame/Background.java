@@ -6,7 +6,7 @@ public class Background extends JFrame {
 /**
  * initializes the number of rows and columns
  * of the background 
- * testingsadasdsa
+ * testing
  */
 
 public final int ROW_NUM ;

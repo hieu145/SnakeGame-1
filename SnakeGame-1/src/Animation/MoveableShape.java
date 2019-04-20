@@ -1,4 +1,4 @@
-package View;
+package Animation;
 import java.awt.*;
 public interface MoveableShape {
 
