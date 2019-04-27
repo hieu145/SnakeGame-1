@@ -21,8 +21,9 @@ public void draw(Graphics2D g2) {
 	g2.draw(head);
 	g2.draw(body);
 	g2.draw(body2);
-	g2.setColor(Color.PINK);
+	g2.setColor(Color.BLACK);
 	g2.fill(head);
+	g2.setColor(Color.WHITE);
 	g2.setFont(new Font("TimesRoman", Font.PLAIN, 50)); 
 	g2.drawString("Welcome", 850, 450);
 }
