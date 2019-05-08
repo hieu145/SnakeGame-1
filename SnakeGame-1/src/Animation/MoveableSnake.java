@@ -32,12 +32,12 @@ public void draw(Graphics2D g2) {
 	g2.setColor(Color.BLACK);
 	g2.fill(head);
 	
-	g2.setColor(Color.BLUE);
+	g2.setColor(Color.BLACK);
 	g2.fill(head1);
-	g2.setColor(Color.CYAN);
+	g2.setColor(Color.WHITE);
 	g2.fill(body);
 	g2.fill(body2);
-	g2.setColor(Color.MAGENTA);
+	g2.setColor(Color.WHITE);
 	g2.fill(bod3);
 	g2.fill(bod4);
 	g2.setColor(Color.WHITE);
