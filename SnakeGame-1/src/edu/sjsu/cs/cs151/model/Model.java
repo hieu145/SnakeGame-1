@@ -1,6 +1,6 @@
 package edu.sjsu.cs.cs151.model;
 
-
+import java.util.Random;
 
 import javax.swing.Timer;
 
@@ -14,11 +14,22 @@ public class Model {
     private final int DOT_SIZE = 25;
     private final int DELAY = 140;
     
+    private Random random = new Random();
+    
     //create the snake
-    int dots = 3;
+    public int dots = 3;
     public final int x[] = new int[ALL_DOTS];
     public final int y[] = new int[ALL_DOTS];
     
+    public Model() {
+    	initGame();	
+    }
+    public int[] getSnakeX() {
+    	return x;
+    }
+    public int[] getSnakeY() {
+    	return y;
+    }
     public int getApple_x() {
 		return apple_x;
 	}
@@ -32,27 +43,31 @@ public class Model {
     private int apple_y;
     
     //moving snake. snake move to the right at the begining
-    boolean leftDirection = false;
-    boolean rightDirection = false;
-    boolean upDirection = false;
-    boolean downDirection = false;
+    public boolean leftDirection = false;
+    public boolean rightDirection = true;
+    public boolean upDirection = false;
+    public boolean downDirection = false;
     public boolean inGame = true;
+	public int score;
+    
+    //create the score
     
     //initialize 
     public void initGame() {
-        x[2] = 50;
-        x[1] = 75;
-        x[0] = 100;
-        y[2] = 100;
-        y[1] = 100;
-        y[0] = 100;
+        x[2] = 250;
+        x[1] = 275;
+        x[0] = 300;
+        y[2] = 250;
+        y[1] = 250;
+        y[0] = 250;
         
         locateApple();
+        
 
     }
     
     //check the snake eat apple and make snake longer
-    void checkApple() {
+    public void checkApple() {
         if ((x[0] == apple_x) && (y[0] == apple_y)) {
             dots++;
             locateApple();
@@ -60,7 +75,7 @@ public class Model {
     }
     
     //Move the snake
-    void move() {
+    public void move() {
 
         for (int z = dots; z > 0; z--) {
             x[z] = x[(z - 1)];
@@ -85,7 +100,7 @@ public class Model {
     }
 
     //check the collision for Gameover
-    void checkCollision() {
+    public void checkCollision() {
 
         for (int z = dots; z > 0; z--) {
 
@@ -113,11 +128,12 @@ public class Model {
     
     //create apple location
     public void locateApple() {
-
+        Object random = null;
+        
         int r = (int) (Math.random() * RAND_POS);
-        apple_x = ((r * DOT_SIZE));
-
-        r = (int) (Math.random() * RAND_POS);
-        apple_y = ((r * DOT_SIZE));
+		apple_x = ((r * DOT_SIZE)+225);
+		r = (int) (Math.random() * RAND_POS);
+        apple_y = ((r * DOT_SIZE)+75);
+        
     }
 }
