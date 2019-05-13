@@ -16,15 +16,14 @@ import edu.sjsu.cs.cs151.NewGameMessage;
 import edu.sjsu.cs.cs151.TimerMessage;
 import edu.sjsu.cs.cs151.model.Model;
 
-//draw the snake
+//draw the model
 
 public class View extends JPanel implements ActionListener {
-	Model snake = new Model();
-	private boolean inGame = true;
-	private Image rightmouth, leftmouth, upmouth, downmouth, snakebody;
+	Model model;
+	//private boolean inGame = true;
+	private Image rightmouth, leftmouth, upmouth, downmouth, modelbody;
 	private Image apple;
 	private Image titleImage;
-	private int score = 0;
 	BlockingQueue<Message> queue;
 
 	public void initView(BlockingQueue<Message> queue) {
@@ -37,7 +36,7 @@ public class View extends JPanel implements ActionListener {
 		timer.start();
 	}
 
-	// draw image of the snake and apple
+	// draw image of the model and apple
 	void loadImages() {
 		ImageIcon rm = new ImageIcon("rightmouth.png");
 		rightmouth = rm.getImage();
@@ -51,17 +50,17 @@ public class View extends JPanel implements ActionListener {
 		ImageIcon dm = new ImageIcon("downmouth.png");
 		downmouth = dm.getImage();
 
-		ImageIcon sb = new ImageIcon("snakeimage.png");
-		snakebody = sb.getImage();
+		ImageIcon sb = new ImageIcon("modelimage.png");
+		modelbody = sb.getImage();
 
 		ImageIcon ap = new ImageIcon("enemy.png");
 		apple = ap.getImage();
 
-		ImageIcon tt = new ImageIcon("snaketitle.jpg");
+		ImageIcon tt = new ImageIcon("modeltitle.jpg");
 		titleImage = tt.getImage();
 	}
 
-	// draw snake
+	// draw model
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
@@ -88,7 +87,7 @@ public class View extends JPanel implements ActionListener {
 		// draw score
 		g.setColor(Color.black);
 		g.setFont(new Font("arial", Font.PLAIN, 24));
-		g.drawString("Scores: " + score, 25, 400);
+		g.drawString("Scores: " + model.getScore(), 25, 400);
 
 		// draw highest score
 		g.setColor(Color.yellow);
@@ -97,7 +96,7 @@ public class View extends JPanel implements ActionListener {
 		g.setFont(new Font("arial", Font.PLAIN, 24));
 		g.drawString("Highest", 75, 135);
 		g.drawString(" Score:", 75, 170);
-		g.drawString("    " + score, 75, 210);
+		g.drawString("    " + model.getScore(), 75, 210);
 
 		//create New game button
 	    JButton btNewGame = new JButton("New Game");
@@ -109,7 +108,6 @@ public class View extends JPanel implements ActionListener {
 				try {
 					queue.put(new NewGameMessage());
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -117,22 +115,22 @@ public class View extends JPanel implements ActionListener {
 	    });
 	    add(btNewGame);
 
-		if (inGame) {
+		if (model.inGame) {
 
-			g.drawImage(apple, snake.getApple_x(), snake.getApple_y(), this);
+			g.drawImage(apple, model.getApple_x(), model.getApple_y(), this);
 
-			for (int z = 0; z < snake.dots; z++) {
+			for (int z = 0; z < model.dots; z++) {
 				if (z == 0) {
-					if (snake.rightDirection)
-						g.drawImage(rightmouth, snake.x[z], snake.y[z], this);
-					if (snake.leftDirection)
-						g.drawImage(leftmouth, snake.x[z], snake.y[z], this);
-					if (snake.upDirection)
-						g.drawImage(upmouth, snake.x[z], snake.y[z], this);
-					if (snake.downDirection)
-						g.drawImage(downmouth, snake.x[z], snake.y[z], this);
+					if (model.rightDirection)
+						g.drawImage(rightmouth, model.x[z], model.y[z], this);
+					if (model.leftDirection)
+						g.drawImage(leftmouth, model.x[z], model.y[z], this);
+					if (model.upDirection)
+						g.drawImage(upmouth, model.x[z], model.y[z], this);
+					if (model.downDirection)
+						g.drawImage(downmouth, model.x[z], model.y[z], this);
 				} else {
-					g.drawImage(snakebody, snake.x[z], snake.y[z], this);
+					g.drawImage(modelbody, model.x[z], model.y[z], this);
 				}
 			}
 
@@ -161,7 +159,6 @@ public class View extends JPanel implements ActionListener {
 		try {
 			queue.put(new TimerMessage());
 		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		// if (model.inGame) {
@@ -185,7 +182,6 @@ public class View extends JPanel implements ActionListener {
 				try {
 					queue.put(new DirectionMessage(Directions.LEFT));
 				} catch (InterruptedException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				// model.leftDirection = true;
@@ -198,7 +194,6 @@ public class View extends JPanel implements ActionListener {
 				try {
 					queue.put(new DirectionMessage(Directions.RIGHT));
 				} catch (InterruptedException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				// model.rightDirection = true;
@@ -211,7 +206,6 @@ public class View extends JPanel implements ActionListener {
 				try {
 					queue.put(new DirectionMessage(Directions.UP));
 				} catch (InterruptedException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				// model.upDirection = true;
@@ -224,7 +218,6 @@ public class View extends JPanel implements ActionListener {
 				try {
 					queue.put(new DirectionMessage(Directions.DOWN));
 				} catch (InterruptedException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				// model.downDirection = true;
@@ -236,7 +229,6 @@ public class View extends JPanel implements ActionListener {
 					try {
 						queue.put(new NewGameMessage());
 					} catch (InterruptedException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}
