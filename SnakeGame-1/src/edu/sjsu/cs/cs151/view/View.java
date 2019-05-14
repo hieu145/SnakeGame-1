@@ -29,11 +29,7 @@ public class View extends JPanel implements ActionListener {
 	int dots = 3;
 	private int viewXSnake[];
 	private int viewYSnake[];
-	final int B_WIDTH = 650;
-	final int B_HEIGHT = 650;
-	private final int ALL_DOTS = 625;
-	private final int RAND_POS = 25;
-	private final int DOT_SIZE = 25;
+	
 	
 	// create the apple
 	private int viewAppleX;
@@ -84,23 +80,21 @@ public class View extends JPanel implements ActionListener {
 		titleImage = tt.getImage();
 	}
 	public void update(GameInfo gameInfo) {
-		//gameInfo.initGame();
+		gameInfo.initGame();
 		gameInfo.checkCollision();
 		this.inGame = gameInfo.getInGame();
-		if(inGame) {
-		this.viewXSnake = gameInfo.getX();
-		this.viewYSnake = gameInfo.getY();
-		this.viewAppleX = gameInfo.getAppleX();
-		this.viewAppleY = gameInfo.getAppleY();
+		
+		this.viewXSnake = gameInfo.xSnake;
+		this.viewYSnake = gameInfo.ySnake;
+		this.viewAppleX = gameInfo.appleX;
+		this.viewAppleY = gameInfo.appleY;
 		
 		this.viewScore = gameInfo.getScore();
 		this.viewHighScore = gameInfo.getHighScore();
 		
+	
 		}
-		else {
-			inGame = false;
-		}
-	}
+	
 
 	// draw model
 	public void paintComponent(Graphics g) {

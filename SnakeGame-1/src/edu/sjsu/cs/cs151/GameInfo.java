@@ -3,7 +3,7 @@ package edu.sjsu.cs.cs151;
 import java.util.Random;
 
 import edu.sjsu.cs.cs151.model.Model;
-
+import javax.swing.Timer;
 public class GameInfo {
 	// create the board
 	//updates
@@ -18,12 +18,12 @@ public class GameInfo {
 
 	// create the snake
 	int dots = 3;
-	private int xSnake[];
-	private int ySnake[];
+	public int xSnake[];
+	public int ySnake[];
 	
 	// create the apple
-	private int appleX;
-	private int appleY;
+	public int appleX;
+	public int appleY;
 
 	// moving snake. snake move to the right at the begining
 	public boolean leftDirection = false;
@@ -33,8 +33,8 @@ public class GameInfo {
 	private boolean inGame;
 
 	// create the score
-	private int score;
-	private int highScore;
+	public int score;
+	public int highScore;
 
 	public GameInfo(Model model) {
 		xSnake = model.getSnakeX();

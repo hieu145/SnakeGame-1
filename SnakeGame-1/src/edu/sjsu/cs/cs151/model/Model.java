@@ -1,5 +1,5 @@
 package edu.sjsu.cs.cs151.model;
-
+import javax.swing.Timer;
 
 //Create the Model for the snakegame including board, snake and apple
 //test commit
@@ -15,8 +15,8 @@ public class Model {
 
 	// create the snake
 	public int dots = 3;
-	public int x[] = new int[ALL_DOTS];
-	public int y[] = new int[ALL_DOTS];
+	public final int x[] = new int[ALL_DOTS];
+	public final int y[] = new int[ALL_DOTS];
 
 	// create the apple
 	private int apple_x;

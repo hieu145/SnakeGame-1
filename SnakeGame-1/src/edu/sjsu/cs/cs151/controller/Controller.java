@@ -26,18 +26,26 @@ public class Controller {
 		this.view = View;
 		this.model = model;
 		this.queue = queue;
+		this.valves.add(new DoNewGameValve());
+		this.valves.add(new DoTimerMessage());
+		this.valves.add( new DoDirectionMessage());
 	}
 
 	private void updateGameInfo() {
+		//int score = gameInfo.getScore();
+		//int[] x = gameInfo.getX();
+		//int[] y = gameInfo.getY();
+		//int xApple = gameInfo.getAppleX();
+		//int yApple = gameInfo.getAppleY();
 		gameInfo.downDirection = model.downDirection;
 		gameInfo.upDirection = model.upDirection;
 		gameInfo.rightDirection = model.rightDirection;
 		gameInfo.leftDirection = model.leftDirection;
-		int score = model.getScore();
-		int appleX = model.getApple_x();
-		int appleY = model.getApple_y();
-		int[] xSnake = model.getSnakeX();
-		int[] ySnake = model.getSnakeY();
+		gameInfo.score = model.getScore();
+		gameInfo.appleX = model.getApple_x();
+		gameInfo.appleY = model.getApple_y();
+		gameInfo.xSnake = model.getSnakeX();
+		gameInfo.ySnake = model.getSnakeY();
 	}
 	public void mainLoop() throws Exception {
 		valves.add(new DoNewGameValve());
@@ -69,7 +77,7 @@ public class Controller {
 			updateGameInfo();
 
 			// action in View
-			view.update(gameInfo);
+			view.update();
 
 			return ValveResponse.EXECUTE;
 		}
@@ -90,7 +98,7 @@ public class Controller {
 			}
 			
 			// action in View
-			view.update(gameInfo);
+			view.update();
 
 			return ValveResponse.EXECUTE;
 		}
@@ -133,7 +141,7 @@ public class Controller {
 			}
 			updateGameInfo();
 			// action in View
-			view.update(gameInfo);
+			view.update();
 
 			return ValveResponse.EXECUTE;
 		}

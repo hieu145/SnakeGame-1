@@ -23,6 +23,7 @@ public class MainView {
 
 		View view = new View();
 		view.initView(queue);
+		view.loadImages();
 		obj1.setBounds(10, 10, 905, 700);
 		obj1.setBackground(Color.DARK_GRAY);
 		obj1.setResizable(false);
@@ -32,10 +33,11 @@ public class MainView {
 
 	}
 
-	public void update(GameInfo gameInfo) {
+	public void update() {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				view.update(gameInfo);
+				obj1.repaint();
 			}
 		});
 
