@@ -1,8 +1,6 @@
 package edu.sjsu.cs.cs151.model;
 
 
-
-
 //Create the Model for the snakegame including board, snake and apple
 //test commit
 public class Model {
