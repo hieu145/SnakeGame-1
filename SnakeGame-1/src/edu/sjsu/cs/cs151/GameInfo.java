@@ -44,6 +44,21 @@ public class GameInfo {
 		highScore = model.getHighscore();
 		inGame = true;
 	}
+public void initGame() {
+		
+		dots = 3;
+				
+		xSnake[2] = 250;
+		xSnake[1] = 275;
+		xSnake[0] = 300;
+		ySnake[2] = 250;
+		ySnake[1] = 250;
+		ySnake[0] = 250;
+
+		
+		
+
+	}
 
 	public int[] getX() {
 		return this.xSnake;

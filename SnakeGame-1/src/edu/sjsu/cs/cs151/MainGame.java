@@ -15,7 +15,7 @@ import javax.swing.Timer;
 import edu.sjsu.cs.cs151.controller.Controller;
 import edu.sjsu.cs.cs151.model.Model;
 import edu.sjsu.cs.cs151.view.MainView;
-
+import edu.sjsu.cs.cs151.view.View;
 public class MainGame {
 	private static MainView view;
 	private static Model model;

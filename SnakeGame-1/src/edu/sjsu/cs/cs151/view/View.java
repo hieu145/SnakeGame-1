@@ -15,7 +15,7 @@ import edu.sjsu.cs.cs151.GameInfo;
 import edu.sjsu.cs.cs151.Message;
 import edu.sjsu.cs.cs151.NewGameMessage;
 import edu.sjsu.cs.cs151.TimerMessage;
-//import edu.sjsu.cs.cs151.model.Model;
+import edu.sjsu.cs.cs151.model.Model;
 
 //draw the model
 
@@ -29,6 +29,11 @@ public class View extends JPanel implements ActionListener {
 	int dots = 3;
 	private int viewXSnake[];
 	private int viewYSnake[];
+	final int B_WIDTH = 650;
+	final int B_HEIGHT = 650;
+	private final int ALL_DOTS = 625;
+	private final int RAND_POS = 25;
+	private final int DOT_SIZE = 25;
 	
 	// create the apple
 	private int viewAppleX;
@@ -79,6 +84,7 @@ public class View extends JPanel implements ActionListener {
 		titleImage = tt.getImage();
 	}
 	public void update(GameInfo gameInfo) {
+		//gameInfo.initGame();
 		gameInfo.checkCollision();
 		this.inGame = gameInfo.getInGame();
 		if(inGame) {
@@ -89,6 +95,7 @@ public class View extends JPanel implements ActionListener {
 		
 		this.viewScore = gameInfo.getScore();
 		this.viewHighScore = gameInfo.getHighScore();
+		
 		}
 		else {
 			inGame = false;
@@ -98,12 +105,11 @@ public class View extends JPanel implements ActionListener {
 	// draw model
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-
 		doDrawing(g);
 	}
 
 	private void doDrawing(Graphics g) {
-
+		
 		// draw title Image boder
 		g.setColor(Color.WHITE);
 		g.drawRect(24, 10, 851, 55);
@@ -150,22 +156,22 @@ public class View extends JPanel implements ActionListener {
 	    });
 	    add(btNewGame);
 
-		if (inGame) {
+		if (this.inGame) {
 
-			g.drawImage(apple, viewAppleX, viewAppleY, this);
+			g.drawImage(apple, this.viewAppleX, this.viewAppleY, this);
 
 			for (int z = 0; z < dots; z++) {
 				if (z == 0) {
 					if (rightDirection)
-						g.drawImage(rightmouth, viewXSnake[z], viewYSnake[z], this);
+						g.drawImage(rightmouth, this.viewXSnake[z], this.viewYSnake[z], this);
 					if (leftDirection)
-						g.drawImage(leftmouth, viewXSnake[z], viewYSnake[z], this);
+						g.drawImage(leftmouth, this.viewXSnake[z], this.viewYSnake[z], this);
 					if (upDirection)
-						g.drawImage(upmouth, viewXSnake[z], viewYSnake[z], this);
+						g.drawImage(upmouth, this.viewXSnake[z], this.viewYSnake[z], this);
 					if (downDirection)
-						g.drawImage(downmouth, viewXSnake[z], viewYSnake[z], this);
+						g.drawImage(downmouth, this.viewXSnake[z], this.viewYSnake[z], this);
 				} else {
-					g.drawImage(modelbody, viewXSnake[z], viewYSnake[z], this);
+					g.drawImage(modelbody, this.viewXSnake[z], this.viewYSnake[z], this);
 				}
 			}
 

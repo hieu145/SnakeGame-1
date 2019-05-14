@@ -69,7 +69,7 @@ public class Controller {
 			updateGameInfo();
 
 			// action in View
-			view.runUpdate();
+			view.update(gameInfo);
 
 			return ValveResponse.EXECUTE;
 		}
@@ -86,11 +86,11 @@ public class Controller {
 				model.checkApple();
 				model.checkCollision();
 				model.move();
-				
+				updateGameInfo();
 			}
-			updateGameInfo();
+			
 			// action in View
-			view.runUpdate();
+			view.update(gameInfo);
 
 			return ValveResponse.EXECUTE;
 		}
@@ -108,28 +108,32 @@ public class Controller {
 				model.leftDirection = true;
 				model.upDirection = false;
 				model.downDirection = false;
+				
 			}
 
 			if ((msg.direction == Directions.RIGHT) && (!model.leftDirection)) {
 				model.rightDirection = true;
 				model.upDirection = false;
 				model.downDirection = false;
+			
 			}
 
 			if ((msg.direction == Directions.UP) && (!model.downDirection)) {
 				model.upDirection = true;
 				model.rightDirection = false;
 				model.leftDirection = false;
+			
 			}
 
 			if ((msg.direction == Directions.DOWN) && (!model.upDirection)) {
 				model.downDirection = true;
 				model.rightDirection = false;
 				model.leftDirection = false;
+				
 			}
 			updateGameInfo();
 			// action in View
-			view.runUpdate();
+			view.update(gameInfo);
 
 			return ValveResponse.EXECUTE;
 		}
