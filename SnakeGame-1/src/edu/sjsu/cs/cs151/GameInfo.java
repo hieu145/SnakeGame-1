@@ -29,7 +29,7 @@ public class GameInfo {
 	public boolean rightDirection = true;
 	public boolean upDirection = false;
 	public boolean downDirection = false;
-	public boolean inGame = true;
+	private boolean inGame;
 
 	// create the score
 	private int score;
@@ -42,7 +42,7 @@ public class GameInfo {
 		appleY = model.getApple_y();
 		score = model.getScore();
 		highScore = model.getHighscore();
-		inGame = true;
+		this.inGame = model.getInGame();
 	}
 public void initGame() {
 		
@@ -86,7 +86,6 @@ public void initGame() {
 		return inGame;
 	}
 	public void checkCollision() {
-
 		for (int z = dots; z > 0; z--) {
 
 			if ((z > 4) && (xSnake[0] == xSnake[z]) && (ySnake[0] == ySnake[z])) {
@@ -110,6 +109,5 @@ public void initGame() {
 			inGame = false;
 		}
 	}
-
-
+	
 }

@@ -60,7 +60,7 @@ public class Controller {
 			}
 			// action in Model
 			model.setScore(0);
-			model.inGame = true;
+			model.getInGame();
 			model.leftDirection = false;
 			model.rightDirection = true;
 			model.upDirection = false;
@@ -81,7 +81,7 @@ public class Controller {
 				return ValveResponse.MISS;
 			}
 			// action in Model
-			if (model.inGame) {
+			if (model.getInGame()) {
 
 				model.checkApple();
 				model.checkCollision();

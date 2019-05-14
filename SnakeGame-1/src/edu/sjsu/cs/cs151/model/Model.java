@@ -28,12 +28,15 @@ public class Model {
 	public boolean rightDirection = true;
 	public boolean upDirection = false;
 	public boolean downDirection = false;
-	public boolean inGame = true;
+	private boolean inGame = true;
 
 	public Model() {
 		initGame();
 	}
-
+	public boolean getInGame()
+	{
+		return inGame;
+	}
 	public int[] getSnakeX() {
 		return x;
 	}
@@ -143,6 +146,7 @@ score = s;
 		if (x[0] < 0) {
 			inGame = false;
 		}
+	
 	}
 
 	// create apple location
