@@ -11,20 +11,39 @@ import javax.swing.*;
 
 import edu.sjsu.cs.cs151.DirectionMessage;
 import edu.sjsu.cs.cs151.Directions;
+import edu.sjsu.cs.cs151.GameInfo;
 import edu.sjsu.cs.cs151.Message;
 import edu.sjsu.cs.cs151.NewGameMessage;
 import edu.sjsu.cs.cs151.TimerMessage;
-import edu.sjsu.cs.cs151.model.Model;
+//import edu.sjsu.cs.cs151.model.Model;
 
 //draw the model
 
 public class View extends JPanel implements ActionListener {
-	Model model;
+	//Model model;
 	//private boolean inGame = true;
 	private Image rightmouth, leftmouth, upmouth, downmouth, modelbody;
 	private Image apple;
 	private Image titleImage;
 	BlockingQueue<Message> queue;
+	int dots = 3;
+	private int viewXSnake[];
+	private int viewYSnake[];
+	
+	// create the apple
+	private int viewAppleX;
+	private int viewAppleY;
+
+	// moving snake. snake move to the right at the begining
+	public boolean leftDirection = false;
+	public boolean rightDirection = true;
+	public boolean upDirection = false;
+	public boolean downDirection = false;
+	public boolean inGame = true;
+
+	// create the score
+	private int viewScore;
+	private int viewHighScore;
 
 	public void initView(BlockingQueue<Message> queue) {
 		this.queue = queue;
@@ -59,6 +78,15 @@ public class View extends JPanel implements ActionListener {
 		ImageIcon tt = new ImageIcon("modeltitle.jpg");
 		titleImage = tt.getImage();
 	}
+	public void update(GameInfo gameInfo) {
+		this.viewXSnake = gameInfo.getX();
+		this.viewYSnake = gameInfo.getY();
+		this.viewAppleX = gameInfo.getAppleX();
+		this.viewAppleY = gameInfo.getAppleY();
+		this.inGame = gameInfo.getInGame();
+		this.viewScore = gameInfo.getScore();
+		this.viewHighScore = gameInfo.getHighScore();
+	}
 
 	// draw model
 	public void paintComponent(Graphics g) {
@@ -87,7 +115,7 @@ public class View extends JPanel implements ActionListener {
 		// draw score
 		g.setColor(Color.black);
 		g.setFont(new Font("arial", Font.PLAIN, 24));
-		g.drawString("Scores: " + model.getScore(), 25, 400);
+		g.drawString("Scores: " + viewScore, 25, 400);
 
 		// draw highest score
 		g.setColor(Color.yellow);
@@ -96,7 +124,7 @@ public class View extends JPanel implements ActionListener {
 		g.setFont(new Font("arial", Font.PLAIN, 24));
 		g.drawString("Highest", 75, 135);
 		g.drawString(" Score:", 75, 170);
-		g.drawString("    " + model.getScore(), 75, 210);
+		g.drawString("    " + viewHighScore, 75, 210);
 
 		//create New game button
 	    JButton btNewGame = new JButton("New Game");
@@ -115,22 +143,22 @@ public class View extends JPanel implements ActionListener {
 	    });
 	    add(btNewGame);
 
-		if (model.inGame) {
+		if (inGame) {
 
-			g.drawImage(apple, model.getApple_x(), model.getApple_y(), this);
+			g.drawImage(apple, viewAppleX, viewAppleY, this);
 
-			for (int z = 0; z < model.dots; z++) {
+			for (int z = 0; z < dots; z++) {
 				if (z == 0) {
-					if (model.rightDirection)
-						g.drawImage(rightmouth, model.x[z], model.y[z], this);
-					if (model.leftDirection)
-						g.drawImage(leftmouth, model.x[z], model.y[z], this);
-					if (model.upDirection)
-						g.drawImage(upmouth, model.x[z], model.y[z], this);
-					if (model.downDirection)
-						g.drawImage(downmouth, model.x[z], model.y[z], this);
+					if (rightDirection)
+						g.drawImage(rightmouth, viewXSnake[z], viewYSnake[z], this);
+					if (leftDirection)
+						g.drawImage(leftmouth, viewXSnake[z], viewYSnake[z], this);
+					if (upDirection)
+						g.drawImage(upmouth, viewXSnake[z], viewYSnake[z], this);
+					if (downDirection)
+						g.drawImage(downmouth, viewXSnake[z], viewYSnake[z], this);
 				} else {
-					g.drawImage(modelbody, model.x[z], model.y[z], this);
+					g.drawImage(modelbody, viewXSnake[z], viewYSnake[z], this);
 				}
 			}
 

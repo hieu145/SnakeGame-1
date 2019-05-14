@@ -29,18 +29,8 @@ public class MainView {
 
 	}
 
-	public void update(final GameInfo gameInfo) {
-		// check slide 20
-		boolean endGame = false;
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				if(!endGame)
-				{
-					
-				}
-					;
-			}
-		});
+	public void run() {
+		
+		view.update(gameInfo);
 	}
-
 }

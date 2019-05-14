@@ -58,6 +58,17 @@ public class GameInfo {
 	public int getAppleY() {
 		return this.appleY;
 	}
-	
+	public int getScore()
+	{
+		return score;
+	}
+	public int getHighScore()
+	{
+		return highScore;
+	}
+	public boolean getInGame()
+	{
+		return inGame;
+	}
 
 }

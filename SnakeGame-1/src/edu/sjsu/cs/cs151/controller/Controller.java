@@ -40,7 +40,7 @@ public class Controller {
 		int[] ySnake = model.getSnakeY();
 	}
 	public void mainLoop() throws Exception {
-		valves.add(new DoNewGameMessage());
+		valves.add(new DoNewGameValve());
 		valves.add(new DoDirectionMessage());
 		ValveResponse response = ValveResponse.EXECUTE;
 		Message message = null;
@@ -53,7 +53,7 @@ public class Controller {
 		}
 	}
 
-	private class DoNewGameMessage implements Valve {
+	private class DoNewGameValve implements Valve {
 		public ValveResponse execute(Message message) {
 			if (message.getClass() != NewGameMessage.class) {
 				return ValveResponse.MISS;
@@ -86,8 +86,9 @@ public class Controller {
 				model.checkApple();
 				model.checkCollision();
 				model.move();
+				
 			}
-
+			updateGameInfo();
 			// action in View
 			view.update(gameInfo);
 
@@ -126,6 +127,7 @@ public class Controller {
 				model.rightDirection = false;
 				model.leftDirection = false;
 			}
+			updateGameInfo();
 			// action in View
 			view.update(gameInfo);
 
