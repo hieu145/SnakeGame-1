@@ -4,6 +4,7 @@ package edu.sjsu.cs.cs151.model;
 
 
 //Create the Model for the snakegame including board, snake and apple
+//test commit
 public class Model {
 	// create the board
 	final int B_WIDTH = 650;
