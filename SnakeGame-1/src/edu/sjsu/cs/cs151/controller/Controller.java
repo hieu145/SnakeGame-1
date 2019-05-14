@@ -69,7 +69,7 @@ public class Controller {
 			updateGameInfo();
 
 			// action in View
-			view.update(gameInfo);
+			view.runUpdate();
 
 			return ValveResponse.EXECUTE;
 		}
@@ -90,7 +90,7 @@ public class Controller {
 			}
 			updateGameInfo();
 			// action in View
-			view.update(gameInfo);
+			view.runUpdate();
 
 			return ValveResponse.EXECUTE;
 		}
@@ -129,7 +129,7 @@ public class Controller {
 			}
 			updateGameInfo();
 			// action in View
-			view.update(gameInfo);
+			view.runUpdate();
 
 			return ValveResponse.EXECUTE;
 		}

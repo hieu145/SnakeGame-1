@@ -10,8 +10,10 @@ import edu.sjsu.cs.cs151.GameInfo;
 import edu.sjsu.cs.cs151.Message;
 
 public class MainView {
+	private GameInfo gameInfo;
+	private View view;
 	JFrame obj1 = new JFrame("Snake Game");
-
+	
 	public void clear() {
 		obj1.dispose();
 	}
@@ -29,8 +31,7 @@ public class MainView {
 
 	}
 
-	public void run() {
-		
+	public void runUpdate() {
 		view.update(gameInfo);
 	}
 }

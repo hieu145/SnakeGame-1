@@ -70,5 +70,31 @@ public class GameInfo {
 	{
 		return inGame;
 	}
+	public void checkCollision() {
+
+		for (int z = dots; z > 0; z--) {
+
+			if ((z > 4) && (xSnake[0] == xSnake[z]) && (ySnake[0] == ySnake[z])) {
+				inGame = false;
+			}
+		}
+
+		if (ySnake[0] >= B_HEIGHT) {
+			inGame = false;
+		}
+
+		if (ySnake[0] < 0) {
+			inGame = false;
+		}
+
+		if (xSnake[0] >= B_WIDTH) {
+			inGame = false;
+		}
+
+		if (xSnake[0] < 0) {
+			inGame = false;
+		}
+	}
+
 
 }

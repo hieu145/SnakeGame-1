@@ -79,13 +79,20 @@ public class View extends JPanel implements ActionListener {
 		titleImage = tt.getImage();
 	}
 	public void update(GameInfo gameInfo) {
+		gameInfo.checkCollision();
+		this.inGame = gameInfo.getInGame();
+		if(inGame) {
 		this.viewXSnake = gameInfo.getX();
 		this.viewYSnake = gameInfo.getY();
 		this.viewAppleX = gameInfo.getAppleX();
 		this.viewAppleY = gameInfo.getAppleY();
-		this.inGame = gameInfo.getInGame();
+		
 		this.viewScore = gameInfo.getScore();
 		this.viewHighScore = gameInfo.getHighScore();
+		}
+		else {
+			inGame = false;
+		}
 	}
 
 	// draw model
