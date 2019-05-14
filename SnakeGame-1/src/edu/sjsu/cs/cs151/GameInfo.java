@@ -6,6 +6,7 @@ import edu.sjsu.cs.cs151.model.Model;
 
 public class GameInfo {
 	// create the board
+	//updates
 	final int B_WIDTH = 650;
 	final int B_HEIGHT = 650;
 	private final int ALL_DOTS = 625;
