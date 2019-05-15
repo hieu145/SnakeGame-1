@@ -2,11 +2,31 @@ package sjsu.cs.cs151.animation;
 import java.awt.*;
 import java.awt.geom.*;
 import java.util.*;
+
+/**
+ * The Class MoveableSnake.
+ */
 public class MoveableSnake implements MoveableShape {
+
+/** The speed. */
 private int speed = 4;
+
+/** The x. */
 private int x;
+
+/** The y. */
 private int y;
+
+/** The width. */
 private int width;
+
+/**
+ * Instantiates a new moveable snake.
+ *
+ * @param x the x
+ * @param y the y
+ * @param width the width
+ */
 public MoveableSnake(int x, int y, int width)
 {
 	this.x = x;
@@ -14,6 +34,9 @@ public MoveableSnake(int x, int y, int width)
 	this.width = width;
 }
 
+/* (non-Javadoc)
+ * @see sjsu.cs.cs151.animation.MoveableShape#draw(java.awt.Graphics2D)
+ */
 public void draw(Graphics2D g2) {
 	Ellipse2D.Double head = new Ellipse2D.Double(x+40,10,30,30);
 	Ellipse2D.Double body = new Ellipse2D.Double(x+25,15,20,20);
@@ -63,6 +86,10 @@ public void draw(Graphics2D g2) {
 	g2.setFont(new Font("TimesRoman", Font.PLAIN, 50)); 
 	g2.drawString("Welcome", 845, 205);
 }
+
+/* (non-Javadoc)
+ * @see sjsu.cs.cs151.animation.MoveableShape#move()
+ */
 public void move() {
 	x = x+speed;
 	

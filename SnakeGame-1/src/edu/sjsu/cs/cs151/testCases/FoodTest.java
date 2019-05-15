@@ -6,9 +6,14 @@ import org.junit.Test;
 
 import edu.sjsu.cs.cs151.model.Food;
 
+/**
+ * The Class FoodTest.
+ */
 public class FoodTest {
 
-	@Test
+	/**
+	 * Test.
+	 */
 	public void test() {
 		Food food = new Food();
 		assertNull(food.getApple_x());

@@ -15,15 +15,40 @@ import edu.sjsu.cs.cs151.GameInfo;
 import edu.sjsu.cs.cs151.view.MainView;
 import edu.sjsu.cs.cs151.view.View;
 
+/**
+ * The Class Controller.
+ */
 public class Controller {
+	
+	/** The view. */
 	MainView view;
+	
+	/** The model. */
 	Model model;
+	
+	/** The queue. */
 	BlockingQueue<Message> queue;
+	
+	/** The direction valve. */
 	private DirectionValve directionValve;
+	
+	/** The timer valve. */
 	private TimerValve timerValve;
+	
+	/** The new game valve. */
 	private NewGameValve newGameValve;
+	
+	/** The game info. */
 	private GameInfo gameInfo;
 
+	/**
+	 * Instantiates a new controller.
+	 *
+	 * @param View the view
+	 * @param model the model
+	 * @param queue the queue
+	 * @param gameInfo the game info
+	 */
 	public Controller(MainView View, Model model, BlockingQueue<Message> queue, GameInfo gameInfo) {
 		this.gameInfo = gameInfo;
 		this.view = View;
@@ -35,23 +60,24 @@ public class Controller {
 	}
 
 
+	/**
+	 * Main loop.
+	 *
+	 * @throws Exception the exception
+	 */
 	public void mainLoop() throws Exception {		
 		while (true) {
 			Message message;
 			while (!queue.isEmpty()) {
 				message = queue.take();
-				//System.out.println("isRunning");
 				if (message instanceof DirectionMessage) {
-					//System.out.println("Exectuing move");
 					directionValve.execute(message);
 				}
 				else if(message instanceof TimerMessage) {
 					timerValve.execute(message);
-					//System.out.println("hello");
 				}
 				else if(message instanceof NewGameMessage) {
 					newGameValve.execute(message);
-					//System.out.println("running");
 				}
 			}
 			
@@ -59,18 +85,22 @@ public class Controller {
 			model.move();
 			view.update();
 			Thread.sleep(125);
-			//System.out.println("what");
 		}
 	}
 
+	/**
+	 * The Class NewGameValve.
+	 */
 	private class NewGameValve implements Valve {
+		
+		/* (non-Javadoc)
+		 * @see edu.sjsu.cs.cs151.controller.Valve#execute(edu.sjsu.cs.cs151.Message)
+		 */
 		public ValveResponse execute(Message message) {
 			if (message.getClass() != NewGameMessage.class) {
 				return ValveResponse.MISS;
 			}
-			// action in Model
 			gameInfo.score=0;
-//			
 			gameInfo.setInGame(true);
 			gameInfo.leftDirection = false;
 			gameInfo.rightDirection = true;
@@ -78,20 +108,24 @@ public class Controller {
 			gameInfo.downDirection = false;
 			model.initGame();
 	
-
-			// action in View
 			view.update();
 
 			return ValveResponse.EXECUTE;
 		}
 	}
 
+	/**
+	 * The Class TimerValve.
+	 */
 	private class TimerValve implements Valve {
+		
+		/* (non-Javadoc)
+		 * @see edu.sjsu.cs.cs151.controller.Valve#execute(edu.sjsu.cs.cs151.Message)
+		 */
 		public ValveResponse execute(Message message) {
 			if (message.getClass() != TimerMessage.class) {
 				return ValveResponse.MISS;
 			}
-			// action in Model
 			if (model.getInGame()) {
 
 				model.checkApple();
@@ -100,20 +134,25 @@ public class Controller {
 				
 			}
 			
-			// action in View
 			view.update();
 
 			return ValveResponse.EXECUTE;
 		}
 	}
 
+	/**
+	 * The Class DirectionValve.
+	 */
 	private class DirectionValve implements Valve {
+		
+		/* (non-Javadoc)
+		 * @see edu.sjsu.cs.cs151.controller.Valve#execute(edu.sjsu.cs.cs151.Message)
+		 */
 		public ValveResponse execute(Message message) {
 
 			if (message.getClass() != DirectionMessage.class) {
 				return ValveResponse.MISS;
 			}
-			// action in Model
 			DirectionMessage msg = (DirectionMessage) message;
 			if ((msg.direction == Directions.LEFT) && (!gameInfo.rightDirection)) {
 				gameInfo.leftDirection = true;
@@ -142,9 +181,7 @@ public class Controller {
 				gameInfo.leftDirection = false;
 				
 			}
-			// action in View
 			view.update();
-//			System.out.println("execute");
 			return ValveResponse.EXECUTE;
 		}
 	}

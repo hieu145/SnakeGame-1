@@ -1,5 +1,14 @@
 package edu.sjsu.cs.cs151.controller;
 
+/**
+ * The Enum ValveResponse.
+ */
 public enum ValveResponse {
-	MISS, EXECUTE, FINISH
+	
+	/** The miss. */
+	MISS, 
+ /** The execute. */
+ EXECUTE, 
+ /** The finish. */
+ FINISH
 };

@@ -4,38 +4,74 @@ import javax.swing.Timer;
 import edu.sjsu.cs.cs151.GameInfo;
 
 import java.util.Random;
-//Create the Model for the snakegame including board, snake and apple
-//test commit
+
+/**
+ * The Class Model.
+ */
 public class Model {
-	// create the board
+	
+	/** The game info. */
 	GameInfo gameInfo;
 	
+	/**
+	 * Instantiates a new model.
+	 *
+	 * @param gameInfo the game info
+	 */
 	public Model(GameInfo gameInfo) {
 		this.gameInfo = gameInfo;
 		initGame();
 	}
+	
+	/**
+	 * Gets the in game.
+	 *
+	 * @return the in game
+	 */
 	public boolean getInGame()
 	{
 		return gameInfo.getInGame();
 	}
+	
+	/**
+	 * Gets the snake X.
+	 *
+	 * @return the snake X
+	 */
 	public int[] getSnakeX() {
 		return gameInfo.getX();
 	}
 
+	/**
+	 * Gets the snake Y.
+	 *
+	 * @return the snake Y
+	 */
 	public int[] getSnakeY() {
 		return gameInfo.getY();
 	}
 
+	/**
+	 * Gets the apple x.
+	 *
+	 * @return the apple x
+	 */
 	public int getApple_x() {
 		return gameInfo.getAppleX();
 	}
 
+	/**
+	 * Gets the apple y.
+	 *
+	 * @return the apple y
+	 */
 	public int getApple_y() {
-		//locateApple();
 		return gameInfo.getAppleY();
 	}
 
-	// initialize
+	/**
+	 * Inits the game.
+	 */
 	public void initGame() {
 		
 				
@@ -51,7 +87,9 @@ public class Model {
 
 	}
 
-	// check the snake eat apple and make snake longer
+	/**
+	 * Check apple.
+	 */
 	public void checkApple() {
 		if ((gameInfo.getX()[0] == gameInfo.getAppleX()) && (gameInfo.getY()[0] == gameInfo.getAppleY())) {
 			gameInfo.dots++;
@@ -61,23 +99,46 @@ public class Model {
 		}
 	}
 
+	/**
+	 * Gets the score.
+	 *
+	 * @return the score
+	 */
 	public int getScore() {
 		return gameInfo.getScore();
 	}
 
+/**
+ * Sets the score.
+ *
+ * @param s the new score
+ */
 public void setScore(int s) {
 	gameInfo.score = s;
 }
+	
+	/**
+	 * Gets the highscore.
+	 *
+	 * @return the highscore
+	 */
 	public int getHighscore() {
 		return gameInfo.getHighScore();
 	}
 
+	/**
+	 * Sets the high score.
+	 *
+	 * @param x the new high score
+	 */
 	private void sethighScore(int x) {
 		if (gameInfo.getHighScore() < x)
 			gameInfo.highScore = x;
 	}
 
-	// Move the snake
+	/**
+	 * Move.
+	 */
 	public void move() {
 		if (!gameInfo.getInGame()) return;
 		
@@ -105,7 +166,9 @@ public void setScore(int s) {
 		checkCollision();
 	}
 
-	// check the collision for Gameover
+	/**
+	 * Check collision.
+	 */
 	public void checkCollision() {
 
 		for (int z = gameInfo.dots; z > 0; z--) {
@@ -134,9 +197,10 @@ public void setScore(int s) {
 		
 	}
 
-	// create apple location
+	/**
+	 * Locate apple.
+	 */
 	public void locateApple() {
-	//	Object random = null;
 		int r = (int) (Math.random() * gameInfo.DOT_SIZE);
 		gameInfo.appleX = ((r * gameInfo.DOT_SIZE) + 225);
 		r = (int) (Math.random() * gameInfo.DOT_SIZE);

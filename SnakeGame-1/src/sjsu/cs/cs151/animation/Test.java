@@ -3,11 +3,26 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-//testing commit
+
+/**
+ * The Class Test.
+ */
 public class Test {
+	
+	/** The Constant ICON_WIDTH. */
 	private static final int ICON_WIDTH = 1900;
+	
+	/** The Constant SNAKE_WIDTH. */
 	private static final int SNAKE_WIDTH = 100;
+	
+	/** The Constant ICON_HEIGHT. */
 	private static final int ICON_HEIGHT = 1900;
+
+/**
+ * The main method.
+ *
+ * @param args the arguments
+ */
 public static void main(String[] args)
 {
 	

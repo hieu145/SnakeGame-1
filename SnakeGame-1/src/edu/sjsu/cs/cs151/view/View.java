@@ -20,34 +20,71 @@ import edu.sjsu.cs.cs151.NewGameMessage;
 import edu.sjsu.cs.cs151.TimerMessage;
 import edu.sjsu.cs.cs151.model.Model;
 
-//draw the model
-//commenttss again
+/**
+ * The Class View.
+ */
 public class View extends JPanel implements ActionListener {
+	
+	/** The model. */
 	Model model;
 	
-	//private boolean inGame = true;
+	/** The modelbody. */
 	private Image rightmouth, leftmouth, upmouth, downmouth, modelbody;
+	
+	/** The apple. */
 	private Image apple;
+	
+	/** The title image. */
 	private Image titleImage;
+	
+	/** The queue. */
 	BlockingQueue<Message> queue;
+	
+	/** The dots. */
 	int dots = 3;
+	
+	/** The view X snake. */
 	private int viewXSnake[];
+	
+	/** The view Y snake. */
 	private int viewYSnake[];
-	// create the apple
+	
+	/** The view apple X. */
 	private int viewAppleX;
+	
+	/** The view apple Y. */
 	private int viewAppleY;
 	
-	// moving snake. snake move to the right at the begining
+	/** The left direction. */
 	public boolean leftDirection = false;
+	
+	/** The right direction. */
 	public boolean rightDirection = true;
+	
+	/** The up direction. */
 	public boolean upDirection = false;
+	
+	/** The down direction. */
 	public boolean downDirection = false;
+	
+	/** The in game. */
 	public boolean inGame = true;
+	
+	/** The game info. */
 	private GameInfo gameInfo;
-	// create the score
+	
+	/** The view score. */
 	private int viewScore;
+	
+	/** The view high score. */
 	private int viewHighScore;
 	
+	/**
+	 * Instantiates a new view.
+	 *
+	 * @param queue the queue
+	 * @param gameInfo the game info
+	 */
 	public View(BlockingQueue<Message> queue, GameInfo gameInfo) {
 		this.queue = queue;
 		this.gameInfo = gameInfo;
@@ -62,7 +99,9 @@ public class View extends JPanel implements ActionListener {
 
 	
 
-	// draw image of the model and apple
+	/**
+	 * Load images.
+	 */
 	void loadImages() {
 		ImageIcon rm = new ImageIcon("resource/rightmouth.png");
 		rightmouth = rm.getImage();
@@ -85,11 +124,14 @@ public class View extends JPanel implements ActionListener {
 		ImageIcon tt = new ImageIcon("resource/snaketitle.jpg");
 		titleImage = tt.getImage();
 	}
+	
+	/**
+	 * Update.
+	 *
+	 * @param gameInfo the game info
+	 */
 	public void update(GameInfo gameInfo) {
-		//gameInfo.initGame();
-		//gameInfo.checkCollision();
-		//this.inGame = gameInfo.getInGame();
-		
+	
 		this.viewXSnake = gameInfo.getX();
 		this.viewYSnake = gameInfo.getY();
 		this.viewAppleX = gameInfo.getAppleX();
@@ -102,12 +144,19 @@ public class View extends JPanel implements ActionListener {
 		}
 	
 
-	// draw model
+	/* (non-Javadoc)
+	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
+	 */
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		doDrawing(g);
 	}
 
+	/**
+	 * Do drawing.
+	 *
+	 * @param g the g
+	 */
 	private void doDrawing(Graphics g) {
 		
 		// draw title Image boder
@@ -185,6 +234,11 @@ public class View extends JPanel implements ActionListener {
 		}
 	}
 
+	/**
+	 * Game over.
+	 *
+	 * @param g the g
+	 */
 	// draw game over screen
 	private void gameOver(Graphics g) {
 
@@ -197,6 +251,9 @@ public class View extends JPanel implements ActionListener {
 		g.drawString(msg, (650 - metr.stringWidth(msg)) / 2, 650 / 2);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		try {
@@ -213,8 +270,14 @@ public class View extends JPanel implements ActionListener {
 		// view.repaint();
 	}
 
+	/**
+	 * The Class TAdapter.
+	 */
 	private class TAdapter extends KeyAdapter {
 
+		/* (non-Javadoc)
+		 * @see java.awt.event.KeyAdapter#keyPressed(java.awt.event.KeyEvent)
+		 */
 		@Override
 		public void keyPressed(KeyEvent e) {
 			//System.out.println("hi");

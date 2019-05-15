@@ -1,5 +1,16 @@
 package edu.sjsu.cs.cs151;
 
+/**
+ * The Enum Directions.
+ */
 public enum Directions {
-	UP, DOWN, LEFT, RIGHT,
+	
+	/** The up. */
+	UP, 
+ /** The down. */
+ DOWN, 
+ /** The left. */
+ LEFT, 
+ /** The right. */
+ RIGHT,
 };

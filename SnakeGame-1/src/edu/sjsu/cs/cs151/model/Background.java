@@ -2,18 +2,26 @@ package edu.sjsu.cs.cs151.model;
 import java.awt.Color;
 import javax.swing.*;
 import java.awt.Dimension;
-public class Background extends JFrame {
-/**
- * initializes the number of rows and columns
- * of the background 
- * testing
- */
 
-public final int ROW_NUM ;
-public final int COL_NUM;
-private Block[][] blocks; 
 /**
- * creates a board
+ * The Class Background.
+ */
+public class Background extends JFrame {
+
+/** The row num. */
+public final int ROW_NUM ;
+
+/** The col num. */
+public final int COL_NUM;
+
+/** The blocks. */
+private Block[][] blocks; 
+
+/**
+ * Instantiates a new background.
+ *
+ * @param rows the rows
+ * @param cols the cols
  */
 public Background(int rows, int cols)
 {
@@ -29,12 +37,28 @@ public Background(int rows, int cols)
 	}
 	createBoard();
 }
+
+/**
+ * Gets the blocks.
+ *
+ * @return the blocks
+ */
 public Block[][]getBlocks(){
 	return blocks;
 }
+
+/**
+ * Sets the blocks.
+ *
+ * @param blocks the new blocks
+ */
 public void setBlocks(Block[][] blocks) {
 	this.blocks = blocks;
 }
+
+/**
+ * Creates the board.
+ */
 private void createBoard()
 {
 	setBackground(Color.PINK);

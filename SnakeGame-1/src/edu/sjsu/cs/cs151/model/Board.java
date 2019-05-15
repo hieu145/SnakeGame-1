@@ -13,40 +13,85 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+/**
+ * The Class Board.
+ */
 public class Board extends JPanel implements ActionListener {
 
+    /** The b width. */
     private final int B_WIDTH = 650;
+    
+    /** The b height. */
     private final int B_HEIGHT = 650;
+    
+    /** The dot size. */
     private final int DOT_SIZE = 25;
+    
+    /** The all dots. */
     private final int ALL_DOTS = 676;
+    
+    /** The rand pos. */
     private final int RAND_POS = 25;
+    
+    /** The delay. */
     private final int DELAY = 140;
 
+    /** The x. */
     private final int x[] = new int[ALL_DOTS];
+    
+    /** The y. */
     private final int y[] = new int[ALL_DOTS];
 
+    /** The dots. */
     private int dots;
+    
+    /** The apple x. */
     private int apple_x;
+    
+    /** The apple y. */
     private int apple_y;
 
+    /** The left direction. */
     private boolean leftDirection = false;
+    
+    /** The right direction. */
     private boolean rightDirection = true;
+    
+    /** The up direction. */
     private boolean upDirection = false;
+    
+    /** The down direction. */
     private boolean downDirection = false;
+    
+    /** The in game. */
     private boolean inGame = true;
 
+    /** The timer. */
     private Timer timer;
+    
+    /** The title image. */
     private Image rightmouth, leftmouth, upmouth, downmouth, snakebody, titleImage;
+    
+    /** The apple. */
     private Image apple;
     
+    /** The score. */
     private int score = 0;
+    
+    /** The highest score. */
     private int highestScore = 0;
 
+    /**
+     * Instantiates a new board.
+     */
     public Board() {
         
         initBoard();
     }
     
+    /**
+     * Inits the board.
+     */
     private void initBoard() {
 
         addKeyListener(new TAdapter());
@@ -58,6 +103,9 @@ public class Board extends JPanel implements ActionListener {
         initGame();
     }
 
+    /**
+     * Load images.
+     */
     private void loadImages() {
     	ImageIcon rm = new ImageIcon ("rightmouth.png");
     	rightmouth = rm.getImage();
@@ -81,6 +129,9 @@ public class Board extends JPanel implements ActionListener {
     	titleImage = tt.getImage();
     }
 
+    /**
+     * Inits the game.
+     */
     private void initGame() {
 
         dots = 3;
@@ -98,6 +149,9 @@ public class Board extends JPanel implements ActionListener {
         timer.start();
     }
 
+    /* (non-Javadoc)
+     * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
+     */
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -105,6 +159,11 @@ public class Board extends JPanel implements ActionListener {
         doDrawing(g);
     }
     
+    /**
+     * Do drawing.
+     *
+     * @param g the g
+     */
     private void doDrawing(Graphics g) {
     	
     	//draw title Image boder
@@ -177,6 +236,11 @@ public class Board extends JPanel implements ActionListener {
         }        
     }
 
+    /**
+     * Game over.
+     *
+     * @param g the g
+     */
     private void gameOver(Graphics g) {
         
         g.setColor(Color.red);
@@ -187,6 +251,9 @@ public class Board extends JPanel implements ActionListener {
 		g.drawString("Space to Restart", 350, 340);
     }
 
+    /**
+     * Check apple.
+     */
     private void checkApple() {
 
         if ((x[0] == apple_x) && (y[0] == apple_y)) {
@@ -198,6 +265,9 @@ public class Board extends JPanel implements ActionListener {
         }
     }
 
+    /**
+     * Move.
+     */
     private void move() {
 
         for (int z = dots; z > 0; z--) {
@@ -222,6 +292,9 @@ public class Board extends JPanel implements ActionListener {
         }
     }
 
+    /**
+     * Check collision.
+     */
     private void checkCollision() {
 
         for (int z = dots; z > 0; z--) {
@@ -252,10 +325,19 @@ public class Board extends JPanel implements ActionListener {
         }
     }
 
+    /**
+     * High score.
+     *
+     * @param s the s
+     */
     private void highScore (int s) {
     	if (highestScore < s)
     	highestScore = s;
     }
+    
+    /**
+     * Locate apple.
+     */
     private void locateApple() {
 
         int r = (int) (Math.random() * RAND_POS);
@@ -265,6 +347,9 @@ public class Board extends JPanel implements ActionListener {
         apple_y = ((r * DOT_SIZE)+75);
     }
 
+    /* (non-Javadoc)
+     * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
 
@@ -278,8 +363,14 @@ public class Board extends JPanel implements ActionListener {
         repaint();
     }
 
+    /**
+     * The Class TAdapter.
+     */
     private class TAdapter extends KeyAdapter {
 
+        /* (non-Javadoc)
+         * @see java.awt.event.KeyAdapter#keyPressed(java.awt.event.KeyEvent)
+         */
         @Override
         public void keyPressed(KeyEvent e) {
 

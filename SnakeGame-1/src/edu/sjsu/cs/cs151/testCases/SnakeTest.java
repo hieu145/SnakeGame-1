@@ -6,9 +6,14 @@ import org.junit.Test;
 
 import edu.sjsu.cs.cs151.model.Snake;
 
+/**
+ * The Class SnakeTest.
+ */
 public class SnakeTest {
 
-	@Test
+	/**
+	 * Test.
+	 */
 	public void test() {
 		Snake snake = new Snake();
 		Snake snake1 = new Snake();
