@@ -101,6 +101,7 @@ public class View extends JPanel implements ActionListener {
 
 	/**
 	 * Load images.
+	 * All images are sourced from Google Images
 	 */
 	void loadImages() {
 		ImageIcon rm = new ImageIcon("resource/rightmouth.png");
