@@ -21,7 +21,7 @@ import edu.sjsu.cs.cs151.TimerMessage;
 import edu.sjsu.cs.cs151.model.Model;
 
 //draw the model
-
+//comments
 public class View extends JPanel implements ActionListener {
 	Model model;
 	
@@ -36,7 +36,7 @@ public class View extends JPanel implements ActionListener {
 	// create the apple
 	private int viewAppleX;
 	private int viewAppleY;
-
+	
 	// moving snake. snake move to the right at the begining
 	public boolean leftDirection = false;
 	public boolean rightDirection = true;
