@@ -64,25 +64,25 @@ public class View extends JPanel implements ActionListener {
 
 	// draw image of the model and apple
 	void loadImages() {
-		ImageIcon rm = new ImageIcon("resourse/rightmouth.png");
+		ImageIcon rm = new ImageIcon("resource/rightmouth.png");
 		rightmouth = rm.getImage();
 		
-		ImageIcon lm = new ImageIcon("resourse/leftmouth.png");
+		ImageIcon lm = new ImageIcon("resource/leftmouth.png");
 		leftmouth = lm.getImage();
 
-		ImageIcon um = new ImageIcon("resourse/upmouth.png");
+		ImageIcon um = new ImageIcon("resource/upmouth.png");
 		upmouth = um.getImage();
 
-		ImageIcon dm = new ImageIcon("resourse/downmouth.png");
+		ImageIcon dm = new ImageIcon("resource/downmouth.png");
 		downmouth = dm.getImage();
 
-		ImageIcon sb = new ImageIcon("resourse/snakeimage.png");
+		ImageIcon sb = new ImageIcon("resource/snakeimage.png");
 		modelbody = sb.getImage();
 
-		ImageIcon ap = new ImageIcon("resourse/enemy.png");
+		ImageIcon ap = new ImageIcon("resource/enemy.png");
 		apple = ap.getImage();
 
-		ImageIcon tt = new ImageIcon("resourse/snaketitle.jpg");
+		ImageIcon tt = new ImageIcon("resource/snaketitle.jpg");
 		titleImage = tt.getImage();
 	}
 	public void update(GameInfo gameInfo) {
