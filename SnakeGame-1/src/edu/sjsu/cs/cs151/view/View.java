@@ -21,7 +21,7 @@ import edu.sjsu.cs.cs151.TimerMessage;
 import edu.sjsu.cs.cs151.model.Model;
 
 //draw the model
-//comments
+//commenttss again
 public class View extends JPanel implements ActionListener {
 	Model model;
 	
