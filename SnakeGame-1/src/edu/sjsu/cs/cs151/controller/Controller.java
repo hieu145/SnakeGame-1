@@ -19,62 +19,65 @@ public class Controller {
 	MainView view;
 	Model model;
 	BlockingQueue<Message> queue;
-	private List<Valve> valves = new LinkedList<Valve>();
+	private DirectionValve directionValve;
+	private TimerValve timerValve;
+	private NewGameValve newGameValve;
 	private GameInfo gameInfo;
 
-	public Controller(MainView View, Model model, BlockingQueue<Message> queue) {
+	public Controller(MainView View, Model model, BlockingQueue<Message> queue, GameInfo gameInfo) {
+		this.gameInfo = gameInfo;
 		this.view = View;
 		this.model = model;
 		this.queue = queue;
-		this.valves.add(new DoNewGameValve());
-		this.valves.add(new DoTimerMessage());
-		this.valves.add( new DoDirectionMessage());
+		this.directionValve = new DirectionValve();
+		this.timerValve = new TimerValve();
+		this.newGameValve = new NewGameValve();
 	}
 
-	private void updateGameInfo() {
-		//int score = gameInfo.getScore();
-		//int[] x = gameInfo.getX();
-		//int[] y = gameInfo.getY();
-		//int xApple = gameInfo.getAppleX();
-		//int yApple = gameInfo.getAppleY();
-		gameInfo.downDirection = model.downDirection;
-		gameInfo.upDirection = model.upDirection;
-		gameInfo.rightDirection = model.rightDirection;
-		gameInfo.leftDirection = model.leftDirection;
-		gameInfo.score = model.getScore();
-		gameInfo.appleX = model.getApple_x();
-		gameInfo.appleY = model.getApple_y();
-		gameInfo.xSnake = model.getSnakeX();
-		gameInfo.ySnake = model.getSnakeY();
-	}
-	public void mainLoop() throws Exception {
-		valves.add(new DoNewGameValve());
-		valves.add(new DoDirectionMessage());
-		ValveResponse response = ValveResponse.EXECUTE;
-		Message message = null;
-		while (response != ValveResponse.FINISH) {
-			try {
-				message = (Message) queue.take();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+
+	public void mainLoop() throws Exception {		
+		while (true) {
+			Message message;
+			while (!queue.isEmpty()) {
+				message = queue.take();
+				//System.out.println("isRunning");
+				if (message instanceof DirectionMessage) {
+					//System.out.println("Exectuing move");
+					directionValve.execute(message);
+				}
+				else if(message instanceof TimerMessage) {
+					timerValve.execute(message);
+					//System.out.println("hello");
+				}
+				else if(message instanceof NewGameMessage) {
+					newGameValve.execute(message);
+					//System.out.println("running");
+				}
 			}
+			
+			
+			model.move();
+			view.update();
+			Thread.sleep(125);
+			//System.out.println("what");
 		}
 	}
 
-	private class DoNewGameValve implements Valve {
+	private class NewGameValve implements Valve {
 		public ValveResponse execute(Message message) {
 			if (message.getClass() != NewGameMessage.class) {
 				return ValveResponse.MISS;
 			}
 			// action in Model
-			model.setScore(0);
-			model.getInGame();
-			model.leftDirection = false;
-			model.rightDirection = true;
-			model.upDirection = false;
-			model.downDirection = false;
+			gameInfo.score=0;
+//			
+			gameInfo.setInGame(true);
+			gameInfo.leftDirection = false;
+			gameInfo.rightDirection = true;
+			gameInfo.upDirection = false;
+			gameInfo.downDirection = false;
 			model.initGame();
-			updateGameInfo();
+	
 
 			// action in View
 			view.update();
@@ -83,7 +86,7 @@ public class Controller {
 		}
 	}
 
-	private class DoTimerMessage implements Valve {
+	private class TimerValve implements Valve {
 		public ValveResponse execute(Message message) {
 			if (message.getClass() != TimerMessage.class) {
 				return ValveResponse.MISS;
@@ -94,7 +97,7 @@ public class Controller {
 				model.checkApple();
 				model.checkCollision();
 				model.move();
-				updateGameInfo();
+				
 			}
 			
 			// action in View
@@ -104,7 +107,7 @@ public class Controller {
 		}
 	}
 
-	private class DoDirectionMessage implements Valve {
+	private class DirectionValve implements Valve {
 		public ValveResponse execute(Message message) {
 
 			if (message.getClass() != DirectionMessage.class) {
@@ -112,37 +115,36 @@ public class Controller {
 			}
 			// action in Model
 			DirectionMessage msg = (DirectionMessage) message;
-			if ((msg.direction == Directions.LEFT) && (!model.rightDirection)) {
-				model.leftDirection = true;
-				model.upDirection = false;
-				model.downDirection = false;
+			if ((msg.direction == Directions.LEFT) && (!gameInfo.rightDirection)) {
+				gameInfo.leftDirection = true;
+				gameInfo.upDirection = false;
+				gameInfo.downDirection = false;
 				
 			}
 
-			if ((msg.direction == Directions.RIGHT) && (!model.leftDirection)) {
-				model.rightDirection = true;
-				model.upDirection = false;
-				model.downDirection = false;
+			if ((msg.direction == Directions.RIGHT) && (!gameInfo.leftDirection)) {
+				gameInfo.rightDirection = true;
+				gameInfo.upDirection = false;
+				gameInfo.downDirection = false;
 			
 			}
 
-			if ((msg.direction == Directions.UP) && (!model.downDirection)) {
-				model.upDirection = true;
-				model.rightDirection = false;
-				model.leftDirection = false;
+			if ((msg.direction == Directions.UP) && (!gameInfo.downDirection)) {
+				gameInfo.upDirection = true;
+				gameInfo.rightDirection = false;
+				gameInfo.leftDirection = false;
 			
 			}
 
-			if ((msg.direction == Directions.DOWN) && (!model.upDirection)) {
-				model.downDirection = true;
-				model.rightDirection = false;
-				model.leftDirection = false;
+			if ((msg.direction == Directions.DOWN) && (!gameInfo.upDirection)) {
+				gameInfo.downDirection = true;
+				gameInfo.rightDirection = false;
+				gameInfo.leftDirection = false;
 				
 			}
-			updateGameInfo();
 			// action in View
 			view.update();
-
+//			System.out.println("execute");
 			return ValveResponse.EXECUTE;
 		}
 	}

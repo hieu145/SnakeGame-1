@@ -7,19 +7,20 @@ import javax.swing.Timer;
 public class GameInfo {
 	// create the board
 	//updates
-	final int B_WIDTH = 650;
-	final int B_HEIGHT = 650;
+	public final int B_WIDTH = 650;
+	public final int B_HEIGHT = 650;
 	private final int ALL_DOTS = 625;
 	private final int RAND_POS = 25;
-	private final int DOT_SIZE = 25;
+	public final int DOT_SIZE = 25;
 	private final int DELAY = 140;
-
+	public final int B_Y = 75;
+	public final int B_X=225;
 	private Random random = new Random();
 
 	// create the snake
-	int dots = 3;
-	public int xSnake[];
-	public int ySnake[];
+	public int dots = 3;
+	private int xSnake[];
+	private int ySnake[];
 	
 	// create the apple
 	public int appleX;
@@ -30,49 +31,37 @@ public class GameInfo {
 	public boolean rightDirection = true;
 	public boolean upDirection = false;
 	public boolean downDirection = false;
-	private boolean inGame;
-
+	private boolean inGame = true;
+	//Model model = new Model();
 	// create the score
 	public int score;
 	public int highScore;
 
-	public GameInfo(Model model) {
-		xSnake = model.getSnakeX();
-		ySnake = model.getSnakeY();
-		appleX = model.getApple_x();
-		appleY = model.getApple_y();
-		score = model.getScore();
-		highScore = model.getHighscore();
-		this.inGame = model.getInGame();
-	}
-public void initGame() {
+	public GameInfo() {
 		
-		dots = 3;
-				
-		xSnake[2] = 250;
-		xSnake[1] = 275;
-		xSnake[0] = 300;
-		ySnake[2] = 250;
-		ySnake[1] = 250;
-		ySnake[0] = 250;
-
-		
-		
+		xSnake = new int[650];
+		ySnake = new int[650];
 
 	}
+
+
 
 	public int[] getX() {
-		return this.xSnake;
+		return xSnake;
 	}
 
 	public int[] getY() {
-		return this.ySnake;
+		return ySnake;
+	}
+	public void setInGame(boolean inGame) {
+		this.inGame = inGame;
+		
 	}
 	public int getAppleX() {
-		return this.appleX;
+		return appleX;
 	}
 	public int getAppleY() {
-		return this.appleY;
+		return appleY;
 	}
 	public int getScore()
 	{

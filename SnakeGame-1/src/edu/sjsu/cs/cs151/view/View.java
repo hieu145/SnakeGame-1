@@ -5,6 +5,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.concurrent.BlockingQueue;
 
 import javax.swing.*;
@@ -20,7 +23,8 @@ import edu.sjsu.cs.cs151.model.Model;
 //draw the model
 
 public class View extends JPanel implements ActionListener {
-	//Model model;
+	Model model;
+	
 	//private boolean inGame = true;
 	private Image rightmouth, leftmouth, upmouth, downmouth, modelbody;
 	private Image apple;
@@ -29,8 +33,6 @@ public class View extends JPanel implements ActionListener {
 	int dots = 3;
 	private int viewXSnake[];
 	private int viewYSnake[];
-	
-	
 	// create the apple
 	private int viewAppleX;
 	private int viewAppleY;
@@ -41,53 +43,57 @@ public class View extends JPanel implements ActionListener {
 	public boolean upDirection = false;
 	public boolean downDirection = false;
 	public boolean inGame = true;
-
+	private GameInfo gameInfo;
 	// create the score
 	private int viewScore;
 	private int viewHighScore;
-
-	public void initView(BlockingQueue<Message> queue) {
+	
+	public View(BlockingQueue<Message> queue, GameInfo gameInfo) {
 		this.queue = queue;
+		this.gameInfo = gameInfo;
 		loadImages();
 		setFocusable(true);
 		setFocusTraversalKeysEnabled(false);
 		addKeyListener(new TAdapter());
 		Timer timer = new Timer(140, this);
 		timer.start();
+		update(gameInfo);
 	}
+
+	
 
 	// draw image of the model and apple
 	void loadImages() {
-		ImageIcon rm = new ImageIcon("rightmouth.png");
+		ImageIcon rm = new ImageIcon("resourse/rightmouth.png");
 		rightmouth = rm.getImage();
-
-		ImageIcon lm = new ImageIcon("leftmouth.png");
+		
+		ImageIcon lm = new ImageIcon("resourse/leftmouth.png");
 		leftmouth = lm.getImage();
 
-		ImageIcon um = new ImageIcon("upmouth.png");
+		ImageIcon um = new ImageIcon("resourse/upmouth.png");
 		upmouth = um.getImage();
 
-		ImageIcon dm = new ImageIcon("downmouth.png");
+		ImageIcon dm = new ImageIcon("resourse/downmouth.png");
 		downmouth = dm.getImage();
 
-		ImageIcon sb = new ImageIcon("modelimage.png");
+		ImageIcon sb = new ImageIcon("resourse/snakeimage.png");
 		modelbody = sb.getImage();
 
-		ImageIcon ap = new ImageIcon("enemy.png");
+		ImageIcon ap = new ImageIcon("resourse/enemy.png");
 		apple = ap.getImage();
 
-		ImageIcon tt = new ImageIcon("modeltitle.jpg");
+		ImageIcon tt = new ImageIcon("resourse/snaketitle.jpg");
 		titleImage = tt.getImage();
 	}
 	public void update(GameInfo gameInfo) {
-		gameInfo.initGame();
-		gameInfo.checkCollision();
-		this.inGame = gameInfo.getInGame();
+		//gameInfo.initGame();
+		//gameInfo.checkCollision();
+		//this.inGame = gameInfo.getInGame();
 		
-		this.viewXSnake = gameInfo.xSnake;
-		this.viewYSnake = gameInfo.ySnake;
-		this.viewAppleX = gameInfo.appleX;
-		this.viewAppleY = gameInfo.appleY;
+		this.viewXSnake = gameInfo.getX();
+		this.viewYSnake = gameInfo.getY();
+		this.viewAppleX = gameInfo.getAppleX();
+		this.viewAppleY = gameInfo.getAppleY();
 		
 		this.viewScore = gameInfo.getScore();
 		this.viewHighScore = gameInfo.getHighScore();
@@ -116,8 +122,8 @@ public class View extends JPanel implements ActionListener {
 		g.drawRect(224, 74, 652, 652);
 
 		// draw background for the gameplay
-		g.setColor(Color.black);
-		g.fillRect(225, 75, 650, 650);
+		g.setColor(Color.pink);
+		g.fillRect(225, gameInfo.B_Y, gameInfo.B_WIDTH, gameInfo.B_HEIGHT);
 
 		// draw score
 		g.setColor(Color.black);
@@ -150,22 +156,24 @@ public class View extends JPanel implements ActionListener {
 	    });
 	    add(btNewGame);
 
-		if (this.inGame) {
+		if (gameInfo.getInGame()) {
 
-			g.drawImage(apple, this.viewAppleX, this.viewAppleY, this);
+			g.drawImage(apple, viewAppleX, viewAppleY, this);
 
-			for (int z = 0; z < dots; z++) {
+			for (int z = 0; z < gameInfo.dots; z++) {
 				if (z == 0) {
+					//System.out.println(this.viewXSnake);
+					//System.out.println(this.viewYSnake);
 					if (rightDirection)
-						g.drawImage(rightmouth, this.viewXSnake[z], this.viewYSnake[z], this);
+						g.drawImage(rightmouth, this.viewXSnake[z],this.viewYSnake[z], this);
 					if (leftDirection)
-						g.drawImage(leftmouth, this.viewXSnake[z], this.viewYSnake[z], this);
+						g.drawImage(leftmouth, this.viewXSnake[z],  this.viewYSnake[z], this);
 					if (upDirection)
-						g.drawImage(upmouth, this.viewXSnake[z], this.viewYSnake[z], this);
+						g.drawImage(upmouth, this.viewXSnake[z],  this.viewYSnake[z], this);
 					if (downDirection)
-						g.drawImage(downmouth, this.viewXSnake[z], this.viewYSnake[z], this);
+						g.drawImage(downmouth, this.viewXSnake[z],  this.viewYSnake[z], this);
 				} else {
-					g.drawImage(modelbody, this.viewXSnake[z], this.viewYSnake[z], this);
+					g.drawImage(modelbody, this.viewXSnake[z],  this.viewYSnake[z], this);
 				}
 			}
 
@@ -184,7 +192,7 @@ public class View extends JPanel implements ActionListener {
 		Font small = new Font("Helvetica", Font.BOLD, 14);
 		FontMetrics metr = getFontMetrics(small);
 
-		g.setColor(Color.white);
+		g.setColor(Color.red);
 		g.setFont(small);
 		g.drawString(msg, (650 - metr.stringWidth(msg)) / 2, 650 / 2);
 	}
@@ -209,6 +217,7 @@ public class View extends JPanel implements ActionListener {
 
 		@Override
 		public void keyPressed(KeyEvent e) {
+			//System.out.println("hi");
 
 			int key = e.getKeyCode();
 
@@ -222,7 +231,9 @@ public class View extends JPanel implements ActionListener {
 				// model.leftDirection = true;
 				// model.upDirection = false;
 				// model.downDirection = false;
+				//System.out.println("Hi");
 			}
+			
 
 			if (key == KeyEvent.VK_RIGHT) // && (!model.leftDirection))
 			{
@@ -258,14 +269,14 @@ public class View extends JPanel implements ActionListener {
 				// model.downDirection = true;
 				// model.rightDirection = false;
 				// model.leftDirection = false;
-
-				if (key == KeyEvent.VK_SPACE) // && (!model.upDirection))
-				{
-					try {
-						queue.put(new NewGameMessage());
-					} catch (InterruptedException e1) {
-						e1.printStackTrace();
-					}
+			}
+			
+			if (key == KeyEvent.VK_SPACE) // && (!model.upDirection))
+			{
+				try {
+					queue.put(new NewGameMessage());
+				} catch (InterruptedException e1) {
+					e1.printStackTrace();
 				}
 			}
 		}

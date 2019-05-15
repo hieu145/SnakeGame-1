@@ -17,13 +17,18 @@ import edu.sjsu.cs.cs151.model.Model;
 import edu.sjsu.cs.cs151.view.MainView;
 import edu.sjsu.cs.cs151.view.View;
 public class MainGame {
-	private static MainView view;
-	private static Model model;
-	private static BlockingQueue<Message>queue = new LinkedBlockingQueue<Message>();
+	
 	public static void main(String[] args) throws Exception {
-		view = new MainView(queue);
-		model = new Model();
-		Controller controller = new Controller(view, model, queue);
+		GameInfo gameInfo = new GameInfo();
+		Model model = new Model(gameInfo);
+		BlockingQueue<Message>queue = new LinkedBlockingQueue<Message>();
+		MainView view = new MainView(queue, gameInfo);
+		//System.out.println("what");
+		
+		
+		
+		
+		Controller controller = new Controller(view, model, queue, gameInfo);
 		try {
 		controller.mainLoop();
 		} catch (Exception e) {
