@@ -83,7 +83,7 @@ public class Controller {
 			
 			
 			model.move();
-			view.update();
+			view.update(gameInfo);
 			Thread.sleep(125);
 		}
 	}
@@ -108,7 +108,7 @@ public class Controller {
 			gameInfo.downDirection = false;
 			model.initGame();
 	
-			view.update();
+			view.update(gameInfo);
 
 			return ValveResponse.EXECUTE;
 		}
@@ -134,7 +134,7 @@ public class Controller {
 				
 			}
 			
-			view.update();
+			view.update(gameInfo);
 
 			return ValveResponse.EXECUTE;
 		}
@@ -181,7 +181,7 @@ public class Controller {
 				gameInfo.leftDirection = false;
 				
 			}
-			view.update();
+			view.update(gameInfo);
 			return ValveResponse.EXECUTE;
 		}
 	}

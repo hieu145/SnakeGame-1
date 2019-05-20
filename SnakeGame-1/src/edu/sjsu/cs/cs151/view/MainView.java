@@ -57,7 +57,7 @@ public class MainView {
 	/**
 	 * Update.
 	 */
-	public void update() {
+	public void update(GameInfo gameInfo) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				view.update(gameInfo);
